@@ -32,7 +32,7 @@ pipeline {
 	  // poll repo every 1 minute for changes
 	  pollSCM('*/1 * * * *')
   }
-  stages {}
+  stages {
     stage('Execute on Jenkins agent') {
       steps {
         container('jenkins-agent-container') {
@@ -43,4 +43,5 @@ pipeline {
         }
       }
     }
-  } 
+  }
+} 
