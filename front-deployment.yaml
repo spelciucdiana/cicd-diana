@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front
+  labels: 
+    io.kompose.service: front
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.20.0 (f3d54d784)
+spec:
+  replicas: 1
+  strategy: {}
+  selector:
+    matchLabels:
+      io.kompose.service: front
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.20.0 (f3d54d784)
+      labels:
+        io.kompose.network/myapp: "true"
+        io.kompose.service: front
+    spec:
+      containers:
+      - image: spelciucdiana/quotes-front:v1
+        name: front
+        ports:
+        - containerPort: 3001
+        resources: {}
+      restartPolicy: Always
+status: {}
